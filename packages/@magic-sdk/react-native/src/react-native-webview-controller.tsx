@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { ViewController, createModalNotReadyError } from '@magic-sdk/provider';
+import { createModalNotReadyError, ViewController } from '@magic-sdk/provider';
 import { MagicMessageEvent } from '@magic-sdk/types';
 import { isTypedArray } from 'lodash';
 import Global = NodeJS.Global;
@@ -51,6 +51,10 @@ interface ViewWrapper extends View {
   hideOverlay: () => void;
 }
 
+export interface RelayerProps {
+  customJS?: string;
+}
+
 /**
  * View controller for the Magic `<WebView>` overlay.
  */
@@ -74,7 +78,7 @@ export class ReactNativeWebViewController extends ViewController {
   // is sufficient (this logic is stable right now and not expected to change in
   // the forseeable future).
   /* istanbul ignore next */
-  public Relayer: React.FC = () => {
+  public Relayer: React.FC<RelayerProps> = ({ customJS }) => {
     const [show, setShow] = useState(false);
 
     /**
@@ -117,6 +121,12 @@ export class ReactNativeWebViewController extends ViewController {
 
     const handleWebViewMessage = useCallback((event: any) => {
       this.handleReactNativeWebViewMessage(event);
+    }, []);
+
+    useEffect(() => {
+      if (customJS && this.webView && (this.webView as any).injectJavaScript) {
+        this.webView.injectJavaScript(customJS);
+      }
     }, []);
 
     return (
