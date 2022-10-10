@@ -75,6 +75,7 @@ export class ReactNativeWebViewController extends ViewController {
   // the forseeable future).
   /* istanbul ignore next */
   public Relayer: React.FC = () => {
+    console.log('HERE WORKING');
     const [show, setShow] = useState(false);
 
     /**
