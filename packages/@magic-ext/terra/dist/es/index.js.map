@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.ts"],
+  "sourcesContent": ["import { Extension } from '@magic-sdk/commons';\nimport { TerraPayloadMethod, TerraConfig } from './types';\n\nexport class TerraExtension extends Extension.Internal<'terra', any> {\n  name = 'terra' as const;\n  config: any = {};\n\n  constructor(public terraConfig: TerraConfig) {\n    super();\n\n    this.config = {\n      rpcUrl: terraConfig.rpcUrl,\n    };\n  }\n\n  public async getPublicKey() {\n    return this.request(this.utils.createJsonRpcRequestPayload(TerraPayloadMethod.TerraGetPublicKey, []));\n  }\n\n  public async sign(payload: Buffer): Promise<Buffer> {\n    return this.request(this.utils.createJsonRpcRequestPayload(TerraPayloadMethod.TerraSign, [payload]));\n  }\n}\n"],
+  "mappings": "6MAAA,OAAS,aAAAA,MAAiB,qBAGnB,IAAMC,EAAN,cAA6BC,EAAU,QAAuB,CAInE,YAAmBC,EAA0B,CAC3C,MAAM,EADW,iBAAAA,EAHnB,UAAO,QACP,YAAc,CAAC,EAKb,KAAK,OAAS,CACZ,OAAQA,EAAY,MACtB,CACF,CAEa,cAAe,QAAAC,EAAA,sBAC1B,OAAO,KAAK,QAAQ,KAAK,MAAM,iDAAkE,CAAC,CAAC,CAAC,CACtG,GAEa,KAAKC,EAAkC,QAAAD,EAAA,sBAClD,OAAO,KAAK,QAAQ,KAAK,MAAM,yCAA0D,CAACC,CAAO,CAAC,CAAC,CACrG,GACF",
+  "names": ["Extension", "TerraExtension", "Extension", "terraConfig", "__async", "payload"]
+}

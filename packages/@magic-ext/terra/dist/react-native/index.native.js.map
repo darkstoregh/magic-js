@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.native.ts", "../../src/index.ts"],
+  "sourcesContent": ["export * from './index';\n", "import { Extension } from '@magic-sdk/commons';\nimport { TerraPayloadMethod, TerraConfig } from './types';\n\nexport class TerraExtension extends Extension.Internal<'terra', any> {\n  name = 'terra' as const;\n  config: any = {};\n\n  constructor(public terraConfig: TerraConfig) {\n    super();\n\n    this.config = {\n      rpcUrl: terraConfig.rpcUrl,\n    };\n  }\n\n  public async getPublicKey() {\n    return this.request(this.utils.createJsonRpcRequestPayload(TerraPayloadMethod.TerraGetPublicKey, []));\n  }\n\n  public async sign(payload: Buffer): Promise<Buffer> {\n    return this.request(this.utils.createJsonRpcRequestPayload(TerraPayloadMethod.TerraSign, [payload]));\n  }\n}\n"],
+  "mappings": "snBAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,oBAAAE,IAAA,eAAAC,EAAAH,GCAA,IAAAI,EAA0B,8BAGnB,IAAMC,EAAN,cAA6B,YAAU,QAAuB,CAInE,YAAmBC,EAA0B,CAC3C,MAAM,EADW,iBAAAA,EAHnB,UAAO,QACP,YAAc,CAAC,EAKb,KAAK,OAAS,CACZ,OAAQA,EAAY,MACtB,CACF,CAEa,cAAe,QAAAC,EAAA,sBAC1B,OAAO,KAAK,QAAQ,KAAK,MAAM,iDAAkE,CAAC,CAAC,CAAC,CACtG,GAEa,KAAKC,EAAkC,QAAAD,EAAA,sBAClD,OAAO,KAAK,QAAQ,KAAK,MAAM,yCAA0D,CAACC,CAAO,CAAC,CAAC,CACrG,GACF",
+  "names": ["index_native_exports", "__export", "TerraExtension", "__toCommonJS", "import_commons", "TerraExtension", "terraConfig", "__async", "payload"]
+}

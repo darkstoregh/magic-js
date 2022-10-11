@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.ts"],
+  "sourcesContent": ["import { Extension } from '@magic-sdk/commons';\nimport { Ed25519PayloadMethod } from './types';\n\nexport class Ed25519Extension extends Extension.Internal<'ed', any> {\n  name = 'ed' as const;\n  config: any = {};\n\n  constructor() {\n    super();\n\n    this.config = {\n      chainType: 'ED',\n    };\n  }\n\n  public getPublicKey = (): Promise<string> => {\n    return this.request({\n      id: 42,\n      jsonrpc: '2.0',\n      method: Ed25519PayloadMethod.GetPublicKey,\n      params: [],\n    });\n  };\n\n  public sign = (payload: Uint8Array): Promise<Uint8Array> => {\n    return this.request({\n      id: 42,\n      jsonrpc: '2.0',\n      method: Ed25519PayloadMethod.Sign,\n      params: payload,\n    });\n  };\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,sBAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA0B,8BAGnB,IAAMC,EAAN,cAA+B,YAAU,QAAoB,CAIlE,aAAc,CACZ,MAAM,EAJR,UAAO,KACP,YAAc,CAAC,EAUf,KAAO,aAAe,IACb,KAAK,QAAQ,CAClB,GAAI,GACJ,QAAS,MACT,yBACA,OAAQ,CAAC,CACX,CAAC,EAGH,KAAO,KAAQC,GACN,KAAK,QAAQ,CAClB,GAAI,GACJ,QAAS,MACT,iBACA,OAAQA,CACV,CAAC,EApBD,KAAK,OAAS,CACZ,UAAW,IACb,CACF,CAmBF",
+  "names": ["src_exports", "__export", "Ed25519Extension", "__toCommonJS", "import_commons", "Ed25519Extension", "payload"]
+}

@@ -1,0 +1,2 @@
+import{Extension as o}from"@magic-sdk/commons";var n=class extends o.Internal{constructor(r){super();this.avalancheConfig=r;this.name="avax";this.config={};this.signTransaction=(r,t,i,s,a)=>this.request({id:42,jsonrpc:"2.0",method:"ava_signTransaction",params:{sendAmount:r,assetId:t,toAddresses:i,fromAddresses:s,changeAddresses:a}});this.config={rpcUrl:r.rpcUrl,chainType:"AVAX",options:{chainId:r.chainId,networkId:r.networkId}}}};export{n as AvalancheExtension};
+//# sourceMappingURL=index.mjs.map

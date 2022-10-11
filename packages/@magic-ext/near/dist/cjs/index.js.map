@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.ts"],
+  "sourcesContent": ["import { Extension } from '@magic-sdk/commons';\nimport { NearPayloadMethod, NearConfig } from './types';\n\nexport class NearExtension extends Extension.Internal<'near', any> {\n  name = 'near' as const;\n  config: any = {};\n\n  constructor(public nearConfig: NearConfig) {\n    super();\n\n    this.config = {\n      rpcUrl: nearConfig.rpcUrl,\n      chainType: 'NEAR',\n    };\n  }\n\n  public async signTransaction(params: any) {\n    return this.request(this.utils.createJsonRpcRequestPayload(NearPayloadMethod.NearSignTransaction, params));\n  }\n\n  public async getPublicKey() {\n    return this.request(this.utils.createJsonRpcRequestPayload(NearPayloadMethod.NearGetPublicKey, []));\n  }\n}\n"],
+  "mappings": "snBAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,mBAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA0B,8BAGnB,IAAMC,EAAN,cAA4B,YAAU,QAAsB,CAIjE,YAAmBC,EAAwB,CACzC,MAAM,EADW,gBAAAA,EAHnB,UAAO,OACP,YAAc,CAAC,EAKb,KAAK,OAAS,CACZ,OAAQA,EAAW,OACnB,UAAW,MACb,CACF,CAEa,gBAAgBC,EAAa,QAAAC,EAAA,sBACxC,OAAO,KAAK,QAAQ,KAAK,MAAM,mDAAmED,CAAM,CAAC,CAC3G,GAEa,cAAe,QAAAC,EAAA,sBAC1B,OAAO,KAAK,QAAQ,KAAK,MAAM,gDAAgE,CAAC,CAAC,CAAC,CACpG,GACF",
+  "names": ["src_exports", "__export", "NearExtension", "__toCommonJS", "import_commons", "NearExtension", "nearConfig", "params", "__async"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.ts"],
+  "sourcesContent": ["import { Extension } from '@magic-sdk/commons';\nimport { ConfluxPayloadMethod, ConfluxConfig } from './types';\n\nexport class ConfluxExtension extends Extension.Internal<'conflux', any> {\n  name = 'conflux' as const;\n  config: any = {};\n\n  constructor(public confluxConfig: ConfluxConfig) {\n    super();\n\n    this.config = {\n      chainType: 'CONFLUX',\n      options: {\n        rpcUrl: confluxConfig.rpcUrl,\n        networkId: confluxConfig.networkId,\n      },\n    };\n  }\n\n  public async sendTransaction(txObject: any) {\n    return this.request(this.utils.createJsonRpcRequestPayload(ConfluxPayloadMethod.ConfluxSendTransaction, txObject));\n  }\n}\n"],
+  "mappings": "6MAAA,OAAS,aAAAA,MAAiB,qBAGnB,IAAMC,EAAN,cAA+BC,EAAU,QAAyB,CAIvE,YAAmBC,EAA8B,CAC/C,MAAM,EADW,mBAAAA,EAHnB,UAAO,UACP,YAAc,CAAC,EAKb,KAAK,OAAS,CACZ,UAAW,UACX,QAAS,CACP,OAAQA,EAAc,OACtB,UAAWA,EAAc,SAC3B,CACF,CACF,CAEa,gBAAgBC,EAAe,QAAAC,EAAA,sBAC1C,OAAO,KAAK,QAAQ,KAAK,MAAM,kDAAyED,CAAQ,CAAC,CACnH,GACF",
+  "names": ["Extension", "ConfluxExtension", "Extension", "confluxConfig", "txObject", "__async"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.ts"],
+  "sourcesContent": ["import { Extension } from '@magic-sdk/commons';\nimport { BitcoinConfig, BitcoinPayloadMethod } from './types';\n\nexport class BitcoinExtension extends Extension.Internal<'bitcoin', any> {\n  name = 'bitcoin' as const;\n  config: any = {};\n\n  constructor(public bitcoinConfig: BitcoinConfig) {\n    super();\n\n    this.config = {\n      rpcUrl: bitcoinConfig.rpcUrl,\n      chainType: 'BITCOIN',\n      options: {\n        network: bitcoinConfig.network,\n      },\n    };\n  }\n\n  public async signTransaction(txn: string, inputIndex: number) {\n    return this.request(\n      this.utils.createJsonRpcRequestPayload(BitcoinPayloadMethod.BitcoinSignTransaction, [txn, inputIndex]),\n    );\n  }\n}\n"],
+  "mappings": "6MAAA,OAAS,aAAAA,MAAiB,qBAGnB,IAAMC,EAAN,cAA+BC,EAAU,QAAyB,CAIvE,YAAmBC,EAA8B,CAC/C,MAAM,EADW,mBAAAA,EAHnB,UAAO,UACP,YAAc,CAAC,EAKb,KAAK,OAAS,CACZ,OAAQA,EAAc,OACtB,UAAW,UACX,QAAS,CACP,QAASA,EAAc,OACzB,CACF,CACF,CAEa,gBAAgBC,EAAaC,EAAoB,QAAAC,EAAA,sBAC5D,OAAO,KAAK,QACV,KAAK,MAAM,kDAAyE,CAACF,EAAKC,CAAU,CAAC,CACvG,CACF,GACF",
+  "names": ["Extension", "BitcoinExtension", "Extension", "bitcoinConfig", "txn", "inputIndex", "__async"]
+}
